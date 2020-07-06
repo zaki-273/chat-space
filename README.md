@@ -13,7 +13,7 @@
 ## groupsテーブル
 |Column|Type|Option|
 |------|----|------|
-|group_name|string|null: false, foreign_key: true|
+|name|string|null: false, foreign_key: true|
 |member|string|null: false, foreign_key: true|
 ### Association
 - has_many :groups_users
