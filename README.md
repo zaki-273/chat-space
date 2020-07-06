@@ -2,9 +2,9 @@
 ## usersテーブル
 |Column|Type|Option|
 |------|----|------|
-|name|string|null: false, foreign_key: true|
-|email|string|null: false, foreign_key: true|
-|password|string|null: false, foreign_key: true|
+|name|string|null: false|
+|email|string|null: false|
+|password|string|null: false|
 ### Association
 - has_many :groups_users
 - has_many :comments
