@@ -6,8 +6,9 @@
 |email|string|null: false, foreign_key: true|
 |password|string|null: false, foreign_key: true|
 ### Association
-- has_many :groups
 - has_many :groups_users
+- has_many :comments
+- has_many :groups, through: :groups_users
 
 ## groupsテーブル
 |Column|Type|Option|
@@ -15,8 +16,9 @@
 |group_name|string|null: false, foreign_key: true|
 |member|string|null: false, foreign_key: true|
 ### Association
-- has_many :users
 - has_many :groups_users
+- has_many :comments
+- has_many :users, through: :groups_users
 
 ## groups_usersテーブル
 |Column|Type|Option|
