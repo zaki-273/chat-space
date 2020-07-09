@@ -1,0 +1,9 @@
+@mixin flex_box($justify, $align){
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+}
+@mixin size($height, $width) {
+  height: $height;
+  width: $width;
+}
