@@ -1,20 +1,3 @@
-@mixin flex_box($justify, $align){
-  display: flex;
-  justify-content: $justify;
-  align-items: $align;
-}
-@mixin size($height, $width) {
-  height: $height;
-  width: $width;
-}
-
-$light-black:#253141;
-$white:#ffffff;
-$light-blue:#38aef0;
-$navy-blue:#2f3e51;
-$black:#333333;
-$gray:#999999;
-
 .wrapper{
   display: flex;
 }
