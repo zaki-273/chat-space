@@ -3,7 +3,7 @@
 }
 
 .Side-bar{
-  width: 300px;
+  @include size(100vh, 300px);
   &__user{
     @include flex_box(null, center);
     height: 100px;
