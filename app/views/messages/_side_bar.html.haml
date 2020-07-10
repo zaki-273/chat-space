@@ -5,19 +5,16 @@
         = current_user.name
       %ul.Side-bar__user__contents__icon-list
         %li.Side-bar__user__contents__icon
-          = link_to "#", class: "Side-bar__user__contents__btn" do
+          = link_to new_group_path, method: :get, class: "Side-bar__user__contents__btn" do
             = icon('fas', 'edit')
         %li.Side-bar__user__contents__icon
           = link_to edit_user_path(current_user), class: "Side-bar__user__contents__btn" do
             = icon('fas', 'cog')
   .Side-bar__group-list
-    .Side-bar__group-list__info
-      .Side-bar__group-list__info__name
-        techcamp
-      .Side-bar__group-list__info__message
-        まだメッセージがありません
-    .Side-bar__group-list__info
-      .Side-bar__group-list__info__name
-        techcamp
-      .Side-bar__group-list__info__message
-        まだメッセージがありません
+    - current_user.groups.each do |group|
+      .Side-bar__group-list__info
+        = link_to '#' do
+          .Side-bar__group-list__info__name
+            = group.name
+          .Side-bar__group-list__info__message
+            まだメッセージがありません
