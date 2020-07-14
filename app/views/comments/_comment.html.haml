@@ -1,0 +1,11 @@
+.Main-chat__message
+  .Main-chat__message__info
+    .Main-chat__message__info__name
+      = comment.user.name
+    .Main-chat__message__info__times
+      = comment.created_at.strftime("%Y年%m月%d日 %H時%M分")
+  .Main-chat__message__content
+    - if comment.text.present?
+      %p.Main-chat__message__text
+        = comment.text
+    = image_tag comment.image.url, class: 'Main-chat__message__image' if comment.image.present?

@@ -1,0 +1,24 @@
+.Main-chat
+  .Main-chat__group-contents
+    .Main-chat__group-contents__info
+      .Main-chat__group-contents__info__name
+        = @group.name
+      %ul.Main-chat__group-contents__info__member
+        Member：
+        %li.Main-chat__group-contents__info__member__list
+          - @group.users.each do |user|
+            = user.name
+    = link_to edit_group_path(@group), class: "Main-chat__group-contents__edit" do
+      Edit
+
+  .CommentField
+    = render @comments
+    
+  .Main-chat__message-form
+    = form_with model: [@group, @comment], class: "Main-chat__message-form__form-contents", local: true do |f|
+      = f.text_field :text,class: "Main-chat__message-form__form-contents__input-text__text", placeholder: 'type a message'
+      .Main-chat__message-form__form-contents__input-text
+        = f.label :image, class: "Main-chat__message-form__form-contents__input-text__label" do
+          =icon('far', 'image', class: "Main-chat__message-form__form-contents__input-text__icon")
+          = f.file_field :image, class: "Main-chat__message-form__form-contents__input-text__label__img"
+      = f.submit 'Send', class: "Main-chat__message-form__form-contents__input-text__submit-btn"
