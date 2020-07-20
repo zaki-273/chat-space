@@ -1,8 +1,9 @@
 $(function(){
+
   function buildHTML(comment){
     if (comment.image) {
       let html = 
-        `<div class="Main-chat__message">
+        `<div class="Main-chat__message" data-comment-id=${comment.id}>
           <div class="Main-chat__message__info">
             <div class="Main-chat__message__info__name">
               ${comment.user_name}
@@ -21,7 +22,7 @@ $(function(){
       return html
     } else {
       let html = 
-      `<div class="Main-chat__message">
+      `<div class="Main-chat__message" data-comment-id=${comment.id}>
         <div class="Main-chat__message__info">
           <div class="Main-chat__message__info__name">
           ${comment.user_name}
@@ -40,27 +41,27 @@ $(function(){
     };
   }
 
-  $('.Main-chat__message-form__form-contents').on('submit', function(e){
-    e.preventDefault()
-    let formData = new FormData(this)
-    let url = $(this).attr('action');
+  let reloadMessages = function() {
+    let last_comment_id = $('.Main-chat__message:last').data("comment-id") || 0;
     $.ajax({
-      url: url,
-      type: 'POST',
-      data: formData,
+      url: "api/comments",
+      type: 'get',
       dataType: 'json',
-      processData: false,
-      contentType: false
+      data: {id: last_comment_id}
     })
-    .done(function(comment){
-      let html = buildHTML(comment);
-      $('.Main-chat__CommentField').append(html);
-      $('.Main-chat__CommentField').animate({scrollTop: $('.Main-chat__CommentField')[0].scrollHeight});
-      $('.Main-chat__message-form__form-contents')[0].reset();
-      $('.Main-chat__message-form__form-contents__input-text__submit-btn').prop('disabled', false);
+    .done(function(comments) {
+      if (comments.length !== 0) {
+        let insertHTML = '';
+        $.each(comments, function(i, comment) {
+          insertHTML += buildHTML(comment)
+        });
+        $('.Main-chat__CommentField').append(insertHTML);
+        $('.Main-chat__CommentField').animate({ scrollTop: $('.Main-chat__CommentField')[0].scrollHeight});
+      }
     })
-    .fail(function(){
-      alert("メッセージ送信に失敗しました")
-    })
-  })
+    .fail(function() {
+      alert('error');
+    });
+  };
+  setInterval(reloadMessages, 7000);
 });
